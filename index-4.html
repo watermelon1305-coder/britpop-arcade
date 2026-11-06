@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BRITPOP ARCADE — 90s Rock Tone Lab</title>
+<style>
+:root{--bg:#10100f;--panel:#1b1b18;--cream:#f2e8d0;--muted:#a9a18e;--lime:#c5e36a;--orange:#ff794d;--line:#454237}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0,#343021 0,transparent 35%),var(--bg);color:var(--cream);font:16px/1.5 Arial,"Noto Sans TC",sans-serif}
+header{padding:28px clamp(18px,5vw,70px) 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:20px}
+.logo{font-weight:900;letter-spacing:.14em;font-size:13px;color:var(--lime)}.tag{font-size:12px;color:var(--muted);letter-spacing:.1em}
+main{max-width:1100px;margin:auto;padding:34px 20px 70px}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center;margin-bottom:28px}
+h1{font-size:clamp(38px,7vw,76px);line-height:.95;letter-spacing:-.06em;margin:12px 0}.hero p{color:var(--muted);max-width:560px}
+.stamp{border:1px solid var(--lime);color:var(--lime);padding:16px;transform:rotate(2deg);text-align:center;font-weight:900;letter-spacing:.12em}
+.stamp b{display:block;font-size:34px}
+.panel{background:linear-gradient(145deg,#24231e,#171714);border:1px solid var(--line);padding:22px;border-radius:8px;margin:18px 0;box-shadow:0 12px 35px #0005}
+h2{font-size:22px;margin:0 0 5px}h3{font-size:16px;margin:0 0 8px}.sub{color:var(--muted);font-size:13px;margin:0 0 18px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+button,select,input{font:inherit}button{cursor:pointer;border:1px solid var(--line);background:#292820;color:var(--cream);padding:11px 14px;border-radius:5px;transition:.15s}
+button:hover{border-color:var(--lime);transform:translateY(-1px)}button.active{background:var(--lime);color:#14150f;border-color:var(--lime);font-weight:800}
+.band{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.preset{min-height:105px;text-align:left}.preset strong{display:block;font-size:17px;margin-bottom:5px}.preset span{font-size:12px;color:var(--muted)}
+.preset.active span{color:#353b20}
+.controls{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+label{display:block;font-size:12px;color:var(--muted);margin-bottom:8px}
+input[type=range]{width:100%;accent-color:var(--lime)}
+.knobval{color:var(--lime);font-variant-numeric:tabular-nums}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.big{background:var(--orange);border-color:var(--orange);color:#1a100d;font-weight:900}
+.visual{height:90px;background:#111;border:1px solid var(--line);border-radius:5px;display:flex;align-items:end;gap:4px;padding:10px;overflow:hidden}
+.bar{flex:1;background:linear-gradient(var(--lime),#637d32);height:10%;border-radius:2px 2px 0 0;transition:height .12s}
+.gamegrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.tile{height:74px;font-size:25px;background:#26251f}.tile.revealed{background:#d1e782;color:#171910}
+#feedback{color:var(--lime);min-height:24px;font-size:13px;margin-top:10px}
+.quizopts{display:flex;gap:8px;flex-wrap:wrap}
+footer{padding:25px;text-align:center;color:#716b5b;font-size:11px;letter-spacing:.1em}
+@media(max-width:720px){.hero{grid-template-columns:1fr}.stamp{max-width:260px}.grid{grid-template-columns:1fr}.controls{grid-template-columns:1fr}.gamegrid{grid-template-columns:repeat(4,1fr)}header{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<header><div class="logo">BRITPOP ARCADE / TONE LAB</div><div class="tag">AN INTERACTIVE 90s ALT-ROCK PLAYGROUND</div></header>
+<main>
+<section class="hero"><div><div class="logo">VOL. 01 — MANCHESTER TO THE WORLD</div><h1>TURN IT<br><span style="color:var(--lime)">UP.</span></h1><p>把九〇年代英倫搖滾的厚實和弦、明亮破音與迷幻空氣感，放進一台可以玩的虛擬效果器。選音色、扭旋鈕、聽差異，再挑戰你的耳朵。</p></div><div class="stamp"><b>1994—99</b>LOUD GUITARS<br>BIG CHORUSES<br>NO APOLOGIES</div></section>
+
+<section class="panel">
+ <div class="band"><div><h2>01 / BAND DNA 音色選擇</h2><p class="sub">靈感取自代表性英倫／另類搖滾聲響；以下為原創合成示範，不是樂團原曲或原版音檔。</p></div><span class="tag">CHOOSE YOUR AMP</span></div>
+ <div class="grid" id="presets">
+  <button class="preset active" data-p="oasis"><strong>OASIS · WALL OF SOUND</strong><span>寬厚開放和弦・英式 crunch・大合唱感</span></button>
+  <button class="preset" data-p="blur"><strong>BLUR · BRITPOP SNAP</strong><span>中頻咬勁・乾爽節奏・俐落切分</span></button>
+  <button class="preset" data-p="radiohead"><strong>RADIOHEAD · SPACE & EDGE</strong><span>空間感・延遲尾韻・冷冽顆粒</span></button>
+ </div>
+</section>
+
+<section class="panel">
+ <div class="band"><div><h2>02 / PEDALBOARD 效果器聆聽</h2><p class="sub">按下播放，用同一段原創吉他 riff 比較效果器前後。</p></div><span class="tag" id="status">AMP STANDBY</span></div>
+ <div class="controls">
+  <div><label>GAIN / 破音量 <b class="knobval" id="gainV">55%</b></label><input id="gain" type="range" min="0" max="100" value="55"></div>
+  <div><label>REVERB / 空間 <b class="knobval" id="revV">25%</b></label><input id="rev" type="range" min="0" max="100" value="25"></div>
+  <div><label>DELAY / 回聲 <b class="knobval" id="delayV">18%</b></label><input id="delay" type="range" min="0" max="100" value="18"></div>
+ </div>
+ <div class="actions"><button class="big" id="play">▶ PLAY RIFF</button><button id="bypass">效果器 BYPASS：OFF</button><button id="stop">■ STOP</button></div>
+ <div class="visual" id="visual" aria-label="音量視覺化"><i class="bar"></i><i class="bar"></i><i class="bar"></i><i class="bar"></i><i class="bar"></i><i class="bar"></i><i class="bar"></i><i class="bar"></i><i class="bar"></i><i class="bar"></i><i class="bar"></i><i class="bar"></i><i class="bar"></i><i class="bar"></i><i class="bar"></i><i class="bar"></i><i class="bar"></i><i class="bar"></i><i class="bar"></i><i class="bar"></i></div>
+ <p class="sub" style="margin:10px 0 0">提示：音訊由瀏覽器即時合成。請先按播放；可用耳機比較 GAIN、REVERB、DELAY 的變化。</p>
+</section>
+
+<section class="panel">
+ <div class="band"><div><h2>03 / RIFF MEMORY 記憶翻牌</h2><p class="sub">找出四組相同的搖滾符號，試試用最少步數完成。</p></div><button id="resetGame">重新洗牌 ↻</button></div>
+ <div class="gamegrid" id="game"></div><div id="feedback">準備好了嗎？翻開兩張卡片。</div>
+</section>
+
+<section class="panel">
+ <h2>04 / NAME THAT TONE 聽感小測驗</h2><p class="sub">播放一段音色，猜猜它是哪種效果器性格。答對加一分！</p>
+ <div class="actions"><button class="big" id="quizPlay">▶ 聽音色</button><span class="tag" id="score">SCORE 0</span></div>
+ <div class="quizopts"><button data-a="crunch">厚實破音 Crunch</button><button data-a="delay">延遲回聲 Delay</button><button data-a="clean">乾淨音 Clean</button></div>
+ <div id="quizFeedback" class="sub" style="margin:12px 0 0">按「聽音色」開始。</div>
+</section>
+</main>
+<footer>BRITPOP ARCADE · ORIGINAL SYNTH SOUND · MADE FOR LOUD DAYDREAMS</footer>
+<script>
+let preset='oasis',bypass=false,ctx=null,master=null,playing=[],score=0,quizAnswer='crunch';
+const $=id=>document.getElementById(id);
+const cfg={oasis:{gain:55,rev:25,delay:18},blur:{gain:38,rev:8,delay:5},radiohead:{gain:48,rev:62,delay:68}};
+function setPreset(p){preset=p;document.querySelectorAll('.preset').forEach(b=>b.classList.toggle('active',b.dataset.p===p));['gain','rev','delay'].forEach(k=>{$(k).value=cfg[p][k];$(k+'V').textContent=cfg[p][k]+'%'});}
+document.querySelectorAll('.preset').forEach(b=>b.onclick=()=>setPreset(b.dataset.p));
+['gain','rev','delay'].forEach(k=>$(k).oninput=()=>$(k+'V').textContent=$(k).value+'%');
+function audio(){if(!ctx){ctx=new(window.AudioContext||window.webkitAudioContext)();master=ctx.createGain();master.gain.value=.65;master.connect(ctx.destination)}if(ctx.state==='suspended')ctx.resume();return ctx}
+function note(freq,start,dur,opts={}){let c=audio(),osc=c.createOscillator(),g=c.createGain(),filter=c.createBiquadFilter(),drive=c.createWaveShaper();let amount=bypass?0:+$('gain').value;let curve=new Float32Array(44100);for(let i=0;i<curve.length;i++){let x=i*2/curve.length-1;curve[i]=(1+amount/13)*x/(1+amount/13*Math.abs(x))}drive.curve=curve;filter.type='lowpass';filter.frequency.value=opts.dark?1700:5200;osc.type='sawtooth';osc.frequency.value=freq;g.gain.setValueAtTime(.0001,start);g.gain.exponentialRampToValueAtTime(opts.vol||.12,start+.015);g.gain.exponentialRampToValueAtTime(.0001,start+dur);osc.connect(drive);drive.connect(filter);filter.connect(g);g.connect(master);let d=+$('delay').value/100;if(!bypass&&d>.01){let dg=c.createGain(),dl=c.createDelay(1);dl.delayTime.value=.28;dg.gain.value=d*.45;g.connect(dl);dl.connect(dg);dg.connect(master)}osc.start(start);osc.stop(start+dur+.03);playing.push(osc)}
+function riff(kind='normal'){stop();let c=audio(),now=c.currentTime+.06;let riffs={normal:[[110,0],[164.8,.25],[220,.5],[164.8,.75],[130.8,1],[196,1.25],[261.6,1.5],[196,1.75]],clean:[[220,0],[261.6,.32],[329.6,.64],[392,.96]],delay:[[146.8,0],[220,.38],[293.7,.76],[220,1.14]]};let arr=riffs[kind]||riffs.normal;arr.forEach(([f,t])=>note(f,now+t,.23,{vol:.13}));if(kind==='normal'){[ [110,1.9],[164.8,1.9],[220,1.9] ].forEach(([f,t])=>note(f,now+t,.7,{vol:.075,dark:true}))}let rev=+$('rev').value/100;if(!bypass&&rev>.02){let g=c.createGain(),d=c.createDelay();d.delayTime.value=.11;g.gain.value=rev*.22;master.connect(d);d.connect(g);g.connect(master);setTimeout(()=>{try{master.disconnect(d);d.disconnect();g.disconnect()}catch(e){}},3500)}$('status').textContent='SIGNAL ON · '+preset.toUpperCase();setTimeout(()=>{$('status').textContent='AMP STANDBY'},3000)}
+function stop(){playing.forEach(o=>{try{o.stop()}catch(e){}});playing=[];$('status').textContent='AMP STANDBY'}
+$('play').onclick=()=>riff();$('stop').onclick=stop;$('bypass').onclick=()=>{bypass=!bypass;$('bypass').textContent='效果器 BYPASS：'+(bypass?'ON':'OFF');$('bypass').classList.toggle('active',bypass)};
+let bars=[...document.querySelectorAll('.bar')];setInterval(()=>bars.forEach(b=>b.style.height=(Math.random()*75+8)+'%'),160);
+const symbols=['✦','♫','★','⚡','✦','♫','★','⚡'];let first=null,lock=false,moves=0,matched=0;
+function shuffle(a){return a.sort(()=>Math.random()-.5)}
+function newGame(){first=null;lock=false;moves=0;matched=0;$('feedback').textContent='準備好了嗎？翻開兩張卡片。';$('game').innerHTML='';shuffle([...symbols]).forEach((s,i)=>{let b=document.createElement('button');b.className='tile';b.textContent='?';b.dataset.s=s;b.onclick=()=>flip(b);$('game').appendChild(b)})}
+function flip(b){if(lock||b.classList.contains('revealed'))return;b.classList.add('revealed');b.textContent=b.dataset.s;if(!first){first=b;return}moves++;if(first.dataset.s===b.dataset.s){matched++;first=null;$('feedback').textContent='配對成功！繼續找下一組。';if(matched===4)$('feedback').textContent='全數配對！你用了 '+moves+' 步，Rock on！'}else{lock=true;let old=first;first=null;setTimeout(()=>{old.classList.remove('revealed');old.textContent='?';b.classList.remove('revealed');b.textContent='?';lock=false;$('feedback').textContent='再試一次！目前 '+moves+' 步。'},700)}}
+$('resetGame').onclick=newGame;newGame();
+$('quizPlay').onclick=()=>{let types=['crunch','delay','clean'];quizAnswer=types[Math.floor(Math.random()*3)];if(quizAnswer==='crunch'){riff('normal')}else if(quizAnswer==='delay'){let old=+$('delay').value;$('delay').value=85;$('delayV').textContent='85%';riff('delay');setTimeout(()=>{$('delay').value=old;$('delayV').textContent=old+'%'},2200)}else{let old=+$('gain').value;$('gain').value=0;$('gainV').textContent='0%';riff('clean');setTimeout(()=>{$('gain').value=old;$('gainV').textContent=old+'%'},2200)}$('quizFeedback').textContent='聽到了嗎？選一個答案。'};
+document.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{if(b.dataset.a===quizAnswer){score++;$('quizFeedback').textContent='答對了！耳朵很敏銳。';$('score').textContent='SCORE '+score}else $('quizFeedback').textContent='再聽一次，注意破音顆粒和回聲尾巴。'});
+</script>
+</body></html>
